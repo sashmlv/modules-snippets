@@ -1,0 +1,35 @@
+{
+   "name": "@application/snippets",
+   "version": "0.0.1",
+   "description": "snippets",
+   "author": "sashmlv",
+   "license": "ISC",
+   "main": "./dist/index",
+   "scripts": {
+      "prepare": "webpack --config ./build/webpack.config",
+      "test": "ava"
+   },
+   "repository": {
+   },
+   "keywords": [
+      "snippets"
+   ],
+   "dependencies": {
+      "deepmerge": "^4.1.1"
+   },
+   "devDependencies": {
+      "ava": "^2.4.0",
+      "webpack": "^4.43.0",
+      "webpack-cli": "^3.3.11"
+   },
+   "ava": {
+      "files": [
+         "!*.js",
+         "./*.test.js"
+      ],
+      "verbose": true,
+      "timeout": "5s",
+      "failFast": true,
+      "serial": true
+   }
+}
