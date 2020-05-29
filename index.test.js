@@ -5,5 +5,5 @@ const test = require( 'ava' ),
 
 test( 'snippets', t => {
 
-	t.deepEqual( snippets.getClass([]), 'array' );
+   t.deepEqual( snippets.getClass([]), 'array' );
 });
