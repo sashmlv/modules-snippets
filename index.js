@@ -59,24 +59,26 @@ class Snippets {
 
    /**
     * Deep freezes an object
-    * https://github.com/30-seconds/30-seconds-of-code#deepfreeze
+    * https://github.com/30-seconds/30-seconds-of-code
     * @param { object } obj
-    * @return { object }
+    * @return { object } Return frozen object
     */
    deepFreeze( obj ) {
 
-      return (
+      if( obj === null || typeof obj !== 'object' ) {
 
-         Object.keys( obj ).forEach(
+         return obj;
+      };
 
-            prop => ! ( obj[ prop ] instanceof Object ) ||
-               Object.isFrozen( obj[ prop ]) ?
-               null :
-               this.deepFreeze( obj[ prop ])
-         ),
+      Object.keys( obj ).forEach( prop => {
 
-         Object.freeze( obj )
-      );
+         if( obj[ prop ] !== null && typeof obj[ prop ] === 'object' && ! Object.isFrozen( obj[ prop ])) {
+
+            this.deepFreeze( obj[ prop ]);
+         };
+      });
+
+      return Object.freeze( obj );
    };
 }
 
