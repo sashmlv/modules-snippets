@@ -1,5 +1,10 @@
 'use strict';
 
+const fs = require( 'fs' ),
+   util = require( 'util' ),
+   path = require( 'path' ),
+   access = util.promisify( fs.access );
+
 class Snippets {
 
    /**
@@ -13,7 +18,38 @@ class Snippets {
    }
 
    /**
+    * Check file exists
+    * @param {string} filePath
+    * @param {boolean} tryFix
+    * @return {boolean} Return file exists
+    **/
+   async exists( filePath, tryFix ) {
+
+      try {
+
+         if( tryFix ){
+
+            filePath = path.resolve( filePath );
+         }
+
+         await access( filePath, fs.constants.F_OK );
+
+         return true;
+      }
+      catch( e ) {
+
+         if( e.code === 'ENOENT' ) {
+
+            return false;
+         }
+
+         throw e;
+      };
+   };
+
+   /**
     * Get datetime string
+    * TODO: write test
     * @param {object} params
     * @param {string} params.datetime
     * @param {string} params.separator
@@ -34,6 +70,7 @@ class Snippets {
 
    /**
     * Creates a deep clone of an object
+    * TODO: write test
     * https://github.com/30-seconds/30-seconds-of-code#deepclone
     * @param { object } obj
     * @return { object }
