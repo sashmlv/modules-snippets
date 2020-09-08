@@ -1,1 +1,1 @@
-### Snippets.
+### The snippets
